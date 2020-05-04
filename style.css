@@ -1,0 +1,183 @@
+html {
+    margin: 0;
+}
+
+body {
+    font-family: 'Oxygen', sans-serif;
+    margin: 0;
+    background-color: #fbfbfb;
+}
+
+
+
+header {
+    background-color: #58ACFF;
+    height: 18vh;
+}
+
+.header-wrap {
+    width: 1366px;
+    margin: auto;
+}
+
+.insert-name,
+.insert-time,
+.insert-add{
+    display: inline-block;
+}
+
+.insert-name {
+    box-sizing: border-box;
+    width: 50%;
+}
+
+.insert-name input{
+    margin-top: 30px;
+    width: 75%;
+    font-size: 20px;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;    
+    color: #707070;
+    margin-bottom: 40px;
+}
+
+.insert-time {
+    box-sizing: border-box;
+    width: 35%;
+}
+
+.insert-time p {
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.insert-time h2 {
+    transform: translate(25px, -20px);
+}
+
+.insert-time select {
+    margin-right: 25px;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    font-size: 20px;
+    color: #707070;
+}
+
+.insert-add img{
+    width: 45px;
+    margin: 0;
+    transform: translate(15px, 12px)
+}
+
+.insert-add h2 {
+    transform: translate(0, -15px)
+}
+
+header h2 {
+    font-size: 36px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-top: 30px;
+}
+
+
+
+main {
+    width: 1366px;
+    border: solid 1px #cfcfcf;
+    margin: auto;
+    height: 82vh;
+    background-color: #fff;
+}
+
+main h1 {
+    text-align: center;
+    color: #707070;
+    font-size: 65px;
+    letter-spacing: 5px;
+    font-weight: lighter;
+    margin: 60px 0;
+}
+
+main div {
+    width: 500px;
+    margin: auto;
+    background-color: #58ACFF;
+    height: 225px;
+    border-radius: 19px;
+    text-align: center;
+
+}
+
+main div p {
+    display: inline-block;
+    font-size: 70px;
+    color: #707070;
+    background-color: #fff;
+    padding: 25px 0;
+    width: 403px;
+
+    transform: translateY(-23px);
+    border-radius: 28px;
+
+}
+
+
+main button {
+    width: 160px;
+    height: 50px;
+    background-color: #58ACFF;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 10px;
+    box-shadow: none;
+    border: none;
+    margin: 40px 15px 40px 0;
+    transform: translateX(510px);
+}
+
+
+.counting {
+    /*class used for the pause counter*/
+    background-color: #204365;
+    color: white;
+}
+
+main > p {
+    font-size:25px;
+    color: #707070;
+    font-weight: normal;
+    text-align: center;
+    margin: 10px;
+}
+
+.congrats {
+    position: fixed;
+    width: 700px;
+    height: 200px;
+    top: 300px;
+    left: 600px;
+    background-color: rgb(255, 255, 255);
+    border: #58ACFF 10px solid;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.congrats p {
+    font-size: 25px;
+    text-align: center;
+    transform: translateY(25px);
+    font-weight: bold;
+}
+

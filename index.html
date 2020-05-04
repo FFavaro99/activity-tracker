@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700&display=swap" rel="stylesheet"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+        <header>
+            <div class="header-wrap">
+
+                <div class="insert-name">
+                    <h2>ACTIVITY NAME</h2>
+                    <input type="text" name="" class="activity-name">
+                </div>
+
+                <div class="insert-time">
+                    <h2>TARGET TIME</h2>
+                    <p>Hours:</p>
+                    <select name="" class="select-hours"></select>
+                    <p>Minutes:</p>
+                    <select name="" class="select-minutes"></select>
+                </div>
+
+                <div class="insert-add">
+                    <h2>ADD</h2>
+                    <img src="plus.svg" alt="Add" class="add-btn">
+                </div>
+                
+                    <script>
+                    //populate hours select
+                    const hoursSelect = document.querySelector('.select-hours');
+                    for (let i = 0; i < 11; i++){
+                        let option = document.createElement('option');
+                        option.text = i;
+                        hoursSelect.append(option);
+                    }
+                    </script>
+                    <script>
+                    //populate minutes select
+                    const minsSelect = document.querySelector('.select-minutes');
+                    for (let i = 0; i < 60; i++){
+                        let option = document.createElement('option');
+                        option.text = i;
+                        minsSelect.append(option);
+                    }
+                    </script>
+            </div>
+        </header>
+
+        <main>
+            <h1 class="current-activity">Current activity name</h1>
+            <div>
+                <p class="countdown">00:00:00</p>
+            </div>
+            <button class="start resume">Start</button>
+            <button class="pause">Pause</button>
+            <p>...next activity:</p>
+            <p class="next-activity">None</p>
+        </main>
+
+        <section class="congrats" hidden>
+            <p>Well done for completing your task!</p>
+            <p>Mina-chan gives you many many smooches :***</p>
+        </section>
+
+        <script src="main.js"></script>
+</body>
+</html>
