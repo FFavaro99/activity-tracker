@@ -111,11 +111,51 @@ main {
     width: 1366px;
     border: solid 1px #cfcfcf;
     margin: auto;
-    height: 82vh;
+    height: calc(100vh - 202px);
     background-color: #fff;
 }
 
-.list,
+
+.list {
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0;
+    width: 49%;
+}
+
+.list ol {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    font-size: 18px;
+    color: #707070;
+    letter-spacing: 2px;
+    transform: translateY(80px);
+}
+
+.list img {
+    margin-left: 20px;
+}
+
+.list p {
+    display: inline-block;
+    font-size: 18px;
+    color: #707070;
+    letter-spacing: 2px;
+}
+
+.list .current {
+    background-color: #58ACFF;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.remove {
+    width: 18px;
+    transform: translateY(3px)
+}
+
 .timer {
     display: inline-block;
     box-sizing: border-box;
@@ -130,7 +170,7 @@ main {
     font-size: 50px;
     letter-spacing: 5px;
     font-weight: normal;
-    margin: 60px 0;
+    margin: 80px 0 60px 0;
 }
 
 .timer div {
@@ -172,8 +212,8 @@ main {
 
 
 .counting {
-    background-color: #204365;
-    color: white;
+    background-color: #204365 !important;
+    color: white !important;
 }
 
 .timer > p {
@@ -203,3 +243,4 @@ main {
     transform: translateY(25px);
     font-weight: bold;
 }
+

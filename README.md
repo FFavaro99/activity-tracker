@@ -12,9 +12,7 @@ Current functionalities are:
 
 
 What I have left to do:
-  - Make the interface responsive, as the current UI is just a mock to test functionality;
-  - Add an on-screen to-do list;
-  - Add the possibility to remove an activity from the list;
+  - Add mobile support
   - Add the possibility to skip an activity halfway through;
   
 Additional functionality will be added as I keep developing and feel like something is missing. For everyone reading this readme, feel free to make constructive criticism as this is the very first tiny JavaScript project I'm working on to hone my skills. Many will follow!

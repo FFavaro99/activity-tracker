@@ -2,7 +2,7 @@
 
 //Global constants and variables
 
-const activityQueue = [];
+let activityQueue = [];
 
 
 let beginCountdown;
@@ -67,6 +67,7 @@ function refreshAll(){
     refreshCurrentActivity();
     refreshCountdown();
     refreshNextActivity();
+    refreshActivityList();
 }
 
 function refreshCurrentActivity(){
@@ -99,6 +100,26 @@ function refreshCountdown(){
         time = '00:00:00'
     }
     document.querySelector('.countdown').innerText = time;
+}
+
+function refreshActivityList(){
+    const lis = document.querySelector('.todo-list').children;
+    for (let i = 0; i < 10; i++){
+        if (i < activityQueue.length){
+            lis[i].children[0].innerText = activityQueue[i].name;
+        }
+        else {
+            lis[i].children[0].innerText = 'No activity scheduled yet';
+        }
+    }
+    if (activityQueue.length != 0){
+        lis[0].children[0].classList.add('current');
+        lis[0].classList.add('current');
+    }
+    else {
+        lis[0].children[0].className = '';
+        lis[0].className = '';
+    }
 }
 
 function refreshPause(){
@@ -146,6 +167,26 @@ function addActivity(e){
     //diplaying info on screen
         refreshAll();
     }
+}
+
+
+function removeActivity(e){
+    const index = this.getAttribute('data-index');
+
+    if (index < activityQueue.length){
+        let arr1 = [];
+        let arr2 = [];
+        for (let i = 0; i < activityQueue.length; i++){
+            if (i < index){
+                arr1.push(activityQueue[i]);
+            }
+            else if (i > index){
+                arr2.push(activityQueue[i]);
+            }
+        }
+        activityQueue = arr1.concat(arr2);
+    }
+    refreshAll();
 }
 
 
@@ -227,3 +268,7 @@ function pauseCount() {
 document.querySelector('.add-btn').addEventListener('click',addActivity);
 document.querySelector('.start').addEventListener('click', startCountdown);
 document.querySelector('.pause').addEventListener('click', pauseCountdown);
+
+for (let element of Array.from(document.querySelectorAll('.remove'))){
+    element.addEventListener('click', removeActivity);
+}
