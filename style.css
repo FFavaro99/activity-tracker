@@ -9,87 +9,101 @@ body {
 }
 
 
-
 header {
     background-color: #58ACFF;
-    height: 18vh;
+    height: 200px;
 }
 
-.header-wrap {
-    width: 1366px;
-    margin: auto;
-}
+ .header-wrap {
+     width: 75%;
+     margin: auto;
+     height: 100%;
+     overflow: hidden;
+ }
 
 .insert-name,
 .insert-time,
 .insert-add{
     display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    transform: translateY(40px);
+}
+
+header h2 {
+    color: #fff;
+    font-weight: bold;
+    font-size: 36px;
+    letter-spacing: 2px;
+    margin: 0;
+    margin-left: 7%;
 }
 
 .insert-name {
-    box-sizing: border-box;
-    width: 50%;
+    width: 49%;
 }
 
-.insert-name input{
-    margin-top: 30px;
-    width: 75%;
-    font-size: 20px;
-    padding: 8px;
+.insert-name input {
+    width: 85%;
+    padding: 9px;
+    border-radius: 6px;
     border: none;
-    border-radius: 6px;    
+    font-size: 16px;
     color: #707070;
-    margin-bottom: 40px;
+    margin-top: 30px;
+    margin-left: 7%;
+    
 }
+
+
 
 .insert-time {
-    box-sizing: border-box;
     width: 35%;
+    text-align: center;
 }
 
 .insert-time p {
-    display: inline-block;
-    color: white;
-    font-weight: bold;
-    margin-right: 10px;
-    margin-top: 20px;
+    color: #fff;
     font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    margin: 0;
+    margin-right: 4px;
+    margin-top: 30px;
+    margin-left: 40px;
 }
 
-.insert-time h2 {
-    transform: translate(25px, -20px);
-}
+
 
 .insert-time select {
-    margin-right: 25px;
-    padding: 8px;
-    border-radius: 6px;
-    border: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     text-indent: 1px;
     text-overflow: '';
-    font-size: 20px;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
     color: #707070;
+    font-size: 16px;
 }
 
-.insert-add img{
-    width: 45px;
+.select-minutes {
+    margin-right: 0px !important;
+}
+
+.insert-add {
+    width: 14%;
+    text-align: center;
+}
+
+.insert-add img {
     margin: 0;
-    transform: translate(15px, 12px)
+    width: 40px;
+    margin-top: 20px;
 }
 
-.insert-add h2 {
-    transform: translate(0, -15px)
-}
 
-header h2 {
-    font-size: 36px;
-    color: white;
-    font-weight: bold;
-    margin-bottom: 0;
-    margin-top: 30px;
-}
+
 
 
 
@@ -101,40 +115,49 @@ main {
     background-color: #fff;
 }
 
-main h1 {
+.list,
+.timer {
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0;
+    width: 49%;
+}
+
+
+.timer h1 {
     text-align: center;
     color: #707070;
-    font-size: 65px;
+    font-size: 50px;
     letter-spacing: 5px;
-    font-weight: lighter;
+    font-weight: normal;
     margin: 60px 0;
 }
 
-main div {
-    width: 500px;
+.timer div {
+    width: 350px;
     margin: auto;
     background-color: #58ACFF;
-    height: 225px;
+    height: 150px;
     border-radius: 19px;
     text-align: center;
 
 }
 
-main div p {
+.timer div p {
     display: inline-block;
-    font-size: 70px;
+    font-size: 50px;
     color: #707070;
     background-color: #fff;
-    padding: 25px 0;
-    width: 403px;
+    padding: 15px 0;
+    width: 300px;
 
-    transform: translateY(-23px);
+    transform: translateY(-20px);
     border-radius: 28px;
 
 }
 
 
-main button {
+.timer button {
     width: 160px;
     height: 50px;
     background-color: #58ACFF;
@@ -144,22 +167,22 @@ main button {
     box-shadow: none;
     border: none;
     margin: 40px 15px 40px 0;
-    transform: translateX(510px);
+    transform: translate(168px, -20px)
 }
 
 
 .counting {
-    /*class used for the pause counter*/
     background-color: #204365;
     color: white;
 }
 
-main > p {
+.timer > p {
     font-size:25px;
     color: #707070;
     font-weight: normal;
     text-align: center;
     margin: 10px;
+    transform: translateY(-30px)
 }
 
 .congrats {
@@ -180,4 +203,3 @@ main > p {
     transform: translateY(25px);
     font-weight: bold;
 }
-
