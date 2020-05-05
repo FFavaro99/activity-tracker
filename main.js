@@ -1,14 +1,23 @@
-/*contains activities, which are objects with name, hours, minutes and seconds attribute*/
+'use strict mode';
+
+//Global constants and variables
+
 const activityQueue = [];
-let paused;
 
 
+let beginCountdown;
+let beginPause;
 
 
-//for the pause counting, until I find a better solution
 let pauseHours = 0;
 let pauseMinutes = 0;
 let pauseSeconds = 0;
+
+let paused = true;
+
+
+
+//Utility functions
 
 function zeroPad(x){
     if (x < 10){
@@ -18,10 +27,30 @@ function zeroPad(x){
     return x;
 }
 
-function validName(currentName){
-    if (currentName != '')
-        return true;
+
+
+
+//Validation functions
+
+function validTask(currentName, currentHours, currentMinutes){
+    if (validName(currentName)){
+        if (validTime(currentHours, currentMinutes)){
+            return true;
+        }
+        else {
+            alert('Invalid target time: cannot be 0');
+        }
+    }
+    else {
+        alert('Invalid task name: cannot be empty');
+    }
     return false;
+}
+
+function validName(currentName){
+    if (currentName.match(/^\s*$/))
+        return false;
+    return true;
 }
 
 function validTime(currentHours, currentMinutes){
@@ -30,51 +59,64 @@ function validTime(currentHours, currentMinutes){
     return true;
 }
 
+
+
+//Refreshing displayed info functions
+
+function refreshAll(){
+    refreshCurrentActivity();
+    refreshCountdown();
+    refreshNextActivity();
+}
+
 function refreshCurrentActivity(){
     const currentActivity = document.querySelector('.current-activity');
-    currentActivity.innerText = activityQueue[0].name;
+    if (activityQueue.length > 0){
+        currentActivity.innerText = activityQueue[0].name;
+    }
+    else {
+        currentActivity.innerText = 'No current activity';
+    }
 }
 
 function refreshNextActivity(){
     const nextActivity = document.querySelector('.next-activity');
-    nextActivity.innerText = activityQueue[1].name;
+    if (activityQueue.length > 1){
+        nextActivity.innerText = activityQueue[1].name;
+    }
+    else nextActivity.innerText = 'None';
 }
 
 function refreshCountdown(){
-    const hours = zeroPad(activityQueue[0].hours);
-    const minutes = zeroPad(activityQueue[0].minutes);
-    const seconds = zeroPad(activityQueue[0].seconds);
-    const time = `${hours}:${minutes}:${seconds}`;
+    let time;
+    if (activityQueue.length > 0){
+        const hours = zeroPad(activityQueue[0].hours);
+        const minutes = zeroPad(activityQueue[0].minutes);
+        const seconds = zeroPad(activityQueue[0].seconds);
+        time = `${hours}:${minutes}:${seconds}`;
+    }
+    else {
+        time = '00:00:00'
+    }
     document.querySelector('.countdown').innerText = time;
 }
 
-function addActivity(e){
-    const name = document.querySelector('.activity-name');
-    const hours = document.querySelector('.select-hours');
-    const mins = document.querySelector('.select-minutes');
-    const currentName = name.value;
-    const currentHours = hours.children[hours.selectedIndex].value;
-    const currentMinutes  = mins.children[mins.selectedIndex].value;
-    if (validName(currentName)){
-        if (validTime(currentHours, currentMinutes)){
-            const newActivity = {name: currentName, hours: currentHours, minutes: currentMinutes, seconds: 0};
-            activityQueue.push(newActivity);
-            alert('Task successfully added!');
-            console.table(activityQueue);
-            if (activityQueue.length == 1){
-                refreshCurrentActivity();
-                refreshCountdown();
-            }
-            else if (activityQueue.length == 2){
-                refreshNextActivity();
-            }
-        }
-        else
-            alert('Invalid task duration!');
+function refreshPause(){
+    if (paused){
+        document.querySelector('.resume').innerText = 'Resume';
+        document.querySelector('.pause').classList.add('counting');
+        document.querySelector('.pause').innerText = `${zeroPad(pauseHours)}:${zeroPad(pauseMinutes)}:${zeroPad(pauseSeconds)}`;
     }
-    else
-        alert('Invalid task name!');
+    else {
+        document.querySelector('.start').innerText = 'Start';
+        document.querySelector('.pause').classList.remove('counting');
+        document.querySelector('.pause').innerText = 'Pause';
+    }
 }
+
+
+
+//Congratulate (Happens at the end of an activity)
 
 function congratulate() {
     document.querySelector('.congrats').hidden = false;
@@ -83,84 +125,85 @@ function congratulate() {
     }, 3000);
 }
 
-function startCountdown(){
-    if (activityQueue.length >= 1){
-        if (paused == undefined){
-            paused = false;
-            setInterval(function() {
-                if ( (activityQueue[0].hours > 0 || activityQueue[0].minutes > 0 || activityQueue[0].seconds > 0) && !paused){
-                        if ( activityQueue[0].minutes == 0 && activityQueue[0].seconds == 0){
-                            activityQueue[0].hours--;
-                            activityQueue[0].minutes = 59;
-                            activityQueue[0].seconds = 59;
-                        }
-                        else if (activityQueue[0].seconds == 0){
-                            activityQueue[0].minutes--;
-                            activityQueue[0].seconds = 59;
-                        }
-                        else {
-                            activityQueue[0].seconds--;
-                        }
-                        refreshCountdown();
-            }
-            else if (activityQueue[0].hours == 0 && activityQueue[0].minutes == 0 && activityQueue[0].seconds == 0){
-                congratulate();
-                activityQueue.shift();
-                if (activityQueue.length > 1){
-                    refreshCurrentActivity();
-                    refreshCountdown();
-                    refreshNextActivity();
-                }
-                else if (activityQueue.length == 1){
-                    refreshCurrentActivity();
-                    refreshCountdown();
-                    document.querySelector('.next-activity').innerText = 'None';
-                }
-                pauseCountdown();
-            }
-        }, 1000);
-        }
-        else {
-            paused = false;
-        }
+
+
+//Queue manipulation functions
+function addActivity(e){
+    const name = document.querySelector('.activity-name');
+    const hours = document.querySelector('.select-hours');
+    const mins = document.querySelector('.select-minutes');
+    const currentName = name.value;
+    const currentHours = hours.children[hours.selectedIndex].value;
+    const currentMinutes  = mins.children[mins.selectedIndex].value;
+
+    //If valid input add the activity to the queue
+    if (validTask(currentName, currentHours, currentMinutes)){
+        const newActivity = {name: currentName, hours: currentHours, minutes: currentMinutes, seconds: 0};
+        activityQueue.push(newActivity);
+        alert('Task successfully added!');
+        console.table(activityQueue); //Debugging purposes
+
+    //diplaying info on screen
+        refreshAll();
     }
 }
 
 
-function pauseCountdown(){
-    if (paused == undefined){}
-    else{
+
+
+//Counting functions
+
+function startCountdown() {
+    if (paused){
+        clearInterval(beginPause);
+        beginCountdown = setInterval(countdown, 1000);
+        paused = false;
+    } 
+}
+
+function countdown(){
+    refreshPause();
+    //If the timer is > 0
+    if (activityQueue[0].hours > 0 || activityQueue[0].minutes > 0 || activityQueue[0].seconds > 0){
+        if ( activityQueue[0].minutes == 0 && activityQueue[0].seconds == 0){
+            activityQueue[0].hours--;
+            activityQueue[0].minutes = 59;
+            activityQueue[0].seconds = 59;
+        }
+        else if (activityQueue[0].seconds == 0){
+            activityQueue[0].minutes--;
+            activityQueue[0].seconds = 59;
+        }
+        else {
+            activityQueue[0].seconds--;
+        }
+        refreshCountdown();
+    }
+    
+    //If the timer gets to 0, aka the activity is finished
+    else {
+        congratulate();
+        activityQueue.shift();
+        pauseCountdown();
+        refreshAll();
+    }
+}
+
+
+
+
+function pauseCountdown() {
+    if (!paused){
         paused = true;
+        clearInterval(beginCountdown);
         pauseHours = 0;
         pauseMinutes = 0;
         pauseSeconds = 0;
+        beginPause = setInterval(pauseCount, 1000);
     }
 }
 
-
-
-
-
-/*                            THINGS MISSING:
-
-    - congratulate function to praise user for finishing a task
-
-*/
-
-
-
-
-
-document.querySelector('.add-btn').addEventListener('click',addActivity);
-document.querySelector('.start').addEventListener('click', startCountdown);
-document.querySelector('.pause').addEventListener('click', pauseCountdown);
-
-
-
-//Counting the pause
-
-setInterval(function() {
-    
+function pauseCount() {
     if (pauseSeconds == 59 && pauseMinutes == 59){
         pauseSeconds = 0;
         pauseMinutes = 0;
@@ -173,14 +216,14 @@ setInterval(function() {
     else {
         pauseSeconds++;
     }
+    refreshPause();
+}
 
-    if (paused && activityQueue.length != 0) {
-        document.querySelector('.pause').classList.add('counting');
-        document.querySelector('.pause').innerText = `${zeroPad(pauseHours)}:${zeroPad(pauseMinutes)}:${zeroPad(pauseSeconds)}`;
-    }
-    else {
-        document.querySelector('.pause').classList.remove('counting');
-        document.querySelector('.pause').innerText = 'Pause';
-    }
-    
-}, 1000);
+
+
+
+//Event listeners
+
+document.querySelector('.add-btn').addEventListener('click',addActivity);
+document.querySelector('.start').addEventListener('click', startCountdown);
+document.querySelector('.pause').addEventListener('click', pauseCountdown);
