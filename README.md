@@ -12,7 +12,6 @@ Current functionalities are:
 
 
 What I have left to do:
-  - Modifying the code to use clearInterval() instead of flags, as I didn't know about this function at the time of programming;
   - Make the interface responsive, as the current UI is just a mock to test functionality;
   - Add an on-screen to-do list;
   - Add the possibility to remove an activity from the list;
