@@ -1,33 +1,29 @@
-html {
-    margin: 0;
+
+* {
+    box-sizing: border-box;
 }
+
 
 body {
     font-family: 'Oxygen', sans-serif;
     margin: 0;
-    background-color: #fbfbfb;
+    background-color: #fff;
 }
 
 
 header {
     background-color: #58ACFF;
-    height: 200px;
+    height: 12.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
- .header-wrap {
-     width: 75%;
-     margin: auto;
-     height: 100%;
-     overflow: hidden;
- }
 
 .insert-name,
 .insert-time,
 .insert-add{
-    display: inline-block;
-    vertical-align: middle;
-    box-sizing: border-box;
-    transform: translateY(40px);
+    text-align: center;
 }
 
 header h2 {
@@ -36,11 +32,10 @@ header h2 {
     font-size: 36px;
     letter-spacing: 2px;
     margin: 0;
-    margin-left: 7%;
 }
 
 .insert-name {
-    width: 49%;
+    width: 50vw;
 }
 
 .insert-name input {
@@ -85,21 +80,23 @@ header h2 {
     padding: 8px;
     color: #707070;
     font-size: 16px;
-}
-
-.select-minutes {
-    margin-right: 0px !important;
+    cursor: pointer;
 }
 
 .insert-add {
-    width: 14%;
+    width: 14vw;
     text-align: center;
 }
 
 .insert-add img {
-    margin: 0;
     width: 40px;
     margin-top: 20px;
+    cursor: pointer;
+}
+
+input:focus,
+select:focus {
+    border: 2px solid greenyellow;
 }
 
 
@@ -108,40 +105,38 @@ header h2 {
 
 
 main {
-    width: 1366px;
-    border: solid 1px #cfcfcf;
-    margin: auto;
-    height: calc(100vh - 202px);
-    background-color: #fff;
+    display: flex;
+    padding-top: 4rem;
 }
-
 
 .list {
-    display: inline-block;
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin: 0;
-    width: 49%;
+    width: 50vw;
+    height: calc(100vh - 16.5rem);
 }
 
-.list ol {
-    width: 80%;
-    margin: auto;
-    text-align: center;
-    font-size: 18px;
-    color: #707070;
-    letter-spacing: 2px;
-    transform: translateY(80px);
+.todo-list {
+    width: 90%;
 }
 
-.list img {
-    margin-left: 20px;
+.todo-list li {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border: 1px #ccc dashed;
+    border-radius: 4px;
 }
 
 .list p {
     display: inline-block;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: #707070;
-    letter-spacing: 2px;
+    letter-spacing: 0.125rem;
+    margin: 1rem;
 }
 
 .list .current {
@@ -149,18 +144,23 @@ main {
     color: #fff;
     font-weight: bold;
     font-size: 20px;
+    border: none;
 }
 
 .remove {
     width: 18px;
-    transform: translateY(3px)
+    margin: 1rem;
+    cursor: pointer;
 }
 
+
 .timer {
-    display: inline-block;
-    box-sizing: border-box;
-    margin: 0;
-    width: 49%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 50vw;
+    height: calc(100vh - 16.5rem);
 }
 
 
@@ -170,16 +170,20 @@ main {
     font-size: 50px;
     letter-spacing: 5px;
     font-weight: normal;
-    margin: 80px 0 60px 0;
+    margin: 40px 0 30px 0;
 }
 
-.timer div {
+.timer-background {
     width: 350px;
-    margin: auto;
+    margin: 0;
     background-color: #58ACFF;
     height: 150px;
     border-radius: 19px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
 }
 
@@ -190,10 +194,14 @@ main {
     background-color: #fff;
     padding: 15px 0;
     width: 300px;
-
-    transform: translateY(-20px);
     border-radius: 28px;
 
+}
+
+.start-pause {
+    width: 25rem;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 
@@ -206,23 +214,22 @@ main {
     border-radius: 10px;
     box-shadow: none;
     border: none;
-    margin: 40px 15px 40px 0;
-    transform: translate(168px, -20px)
+    cursor: pointer;
 }
 
 
-.counting {
-    background-color: #204365 !important;
-    color: white !important;
+.pause.counting {
+    background-color: #204365;
+    color: white ;
 }
 
-.timer > p {
+.timer .next > p {
+    display: block;
     font-size:25px;
     color: #707070;
     font-weight: normal;
     text-align: center;
-    margin: 10px;
-    transform: translateY(-30px)
+    margin: 0;
 }
 
 .congrats {
